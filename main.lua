@@ -1,21 +1,11 @@
--- 外部スクリプト読み込み部分
-local success, result = pcall(function()
-    return game:HttpGet("https://pastebin.com/4hPx9AhZ", true)
-end)
-
-if success then
-    loadstring(result)()
-else
-    warn("スクリプトの読み込みに失敗しました:", result)
-end
-
+-- 外部スクリプト読み込みを削除（直接コードを記述）
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 
 local LocalPlayer = Players.LocalPlayer
 
--- RemoteEvent検索関数
+-- RemoteEvent検索関数（元のまま）
 local function findRemoteEvent()
     local containers = {LocalPlayer.Backpack, LocalPlayer.Character}
     
@@ -34,411 +24,378 @@ local function findRemoteEvent()
     return nil
 end
 
--- Vfly GUIの作成
-local Flymguiv2 = Instance.new("ScreenGui")
-local Drag = Instance.new("Frame")
-local FlyFrame = Instance.new("Frame")
-local ddnsfbfwewefe = Instance.new("TextButton")
-local Speed = Instance.new("TextBox")
-local Fly = Instance.new("TextButton")
-local Speeed = Instance.new("TextLabel")
-local Stat = Instance.new("TextLabel")
-local Stat2 = Instance.new("TextLabel")
-local Unfly = Instance.new("TextButton")
-local Vfly = Instance.new("TextLabel")
-local Close = Instance.new("TextButton")
-local Minimize = Instance.new("TextButton")
-local Flyon = Instance.new("Frame")
-local W = Instance.new("TextButton")
-local S = Instance.new("TextButton")
+-- GUI作成
+local main = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local up = Instance.new("TextButton")
+local down = Instance.new("TextButton")
+local onof = Instance.new("TextButton")
+local TextLabel = Instance.new("TextLabel")
+local plus = Instance.new("TextButton")
+local speed = Instance.new("TextLabel")
+local mine = Instance.new("TextButton")
+local closebutton = Instance.new("TextButton")
+local mini = Instance.new("TextButton")
+local mini2 = Instance.new("TextButton")
 
---Properties:
+main.Name = "main"
+main.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+main.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+main.ResetOnSpawn = false
 
-Flymguiv2.Name = "Flym gui v2"
-Flymguiv2.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-Flymguiv2.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+Frame.Parent = main
+Frame.BackgroundColor3 = Color3.fromRGB(163, 255, 137)
+Frame.BorderColor3 = Color3.fromRGB(103, 221, 213)
+Frame.Position = UDim2.new(0.100320168, 0, 0.379746825, 0)
+Frame.Size = UDim2.new(0, 190, 0, 57)
 
-Drag.Name = "Drag"
-Drag.Parent = Flymguiv2
-Drag.Active = true
-Drag.BackgroundColor3 = Color3.fromRGB(0, 102, 0)
-Drag.BorderSizePixel = 0
-Drag.Draggable = true
-Drag.Position = UDim2.new(0.482438415, 0, 0.454874992, 0)
-Drag.Size = UDim2.new(0, 237, 0, 27)
+up.Name = "up"
+up.Parent = Frame
+up.BackgroundColor3 = Color3.fromRGB(79, 255, 152)
+up.Size = UDim2.new(0, 44, 0, 28)
+up.Font = Enum.Font.SourceSans
+up.Text = "UP"
+up.TextColor3 = Color3.fromRGB(0, 0, 0)
+up.TextSize = 14.000
 
-FlyFrame.Name = "FlyFrame"
-FlyFrame.Parent = Drag
-FlyFrame.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
-FlyFrame.BorderSizePixel = 0
-FlyFrame.Draggable = true
-FlyFrame.Position = UDim2.new(-0.00200000009, 0, 0.989000022, 0)
-FlyFrame.Size = UDim2.new(0, 237, 0, 139)
+down.Name = "down"
+down.Parent = Frame
+down.BackgroundColor3 = Color3.fromRGB(215, 255, 121)
+down.Position = UDim2.new(0, 0, 0.491228074, 0)
+down.Size = UDim2.new(0, 44, 0, 28)
+down.Font = Enum.Font.SourceSans
+down.Text = "DOWN"
+down.TextColor3 = Color3.fromRGB(0, 0, 0)
+down.TextSize = 14.000
 
-ddnsfbfwewefe.Name = "ddnsfbfwewefe"
-ddnsfbfwewefe.Parent = FlyFrame
-ddnsfbfwewefe.BackgroundColor3 = Color3.fromRGB(102, 0, 0)
-ddnsfbfwewefe.BorderSizePixel = 0
-ddnsfbfwewefe.Position = UDim2.new(-0.000210968778, 0, -0.00395679474, 0)
-ddnsfbfwewefe.Size = UDim2.new(0, 237, 0, 27)
-ddnsfbfwewefe.Font = Enum.Font.SourceSans
-ddnsfbfwewefe.Text = "Vfly Script"
-ddnsfbfwewefe.TextColor3 = Color3.fromRGB(255, 255, 255)
-ddnsfbfwewefe.TextScaled = true
-ddnsfbfwewefe.TextSize = 14.000
-ddnsfbfwewefe.TextWrapped = true
+onof.Name = "onof"
+onof.Parent = Frame
+onof.BackgroundColor3 = Color3.fromRGB(255, 249, 74)
+onof.Position = UDim2.new(0.702823281, 0, 0.491228074, 0)
+onof.Size = UDim2.new(0, 56, 0, 28)
+onof.Font = Enum.Font.SourceSans
+onof.Text = "fly"
+onof.TextColor3 = Color3.fromRGB(0, 0, 0)
+onof.TextSize = 14.000
 
-Speed.Name = "Speed"
-Speed.Parent = FlyFrame
-Speed.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Speed.BorderColor3 = Color3.fromRGB(102, 0, 0)
-Speed.BorderSizePixel = 3
-Speed.Position = UDim2.new(0.445025861, 0, 0.402877688, 0)
-Speed.Size = UDim2.new(0, 111, 0, 33)
-Speed.Font = Enum.Font.SourceSans
-Speed.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
-Speed.Text = "20"
-Speed.TextColor3 = Color3.fromRGB(255, 0, 0)
-Speed.TextScaled = true
-Speed.TextSize = 14.000
-Speed.TextWrapped = true
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(242, 60, 255)
+TextLabel.Position = UDim2.new(0.469327301, 0, 0, 0)
+TextLabel.Size = UDim2.new(0, 100, 0, 28)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "FLY GUI V3"
+TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
 
-Fly.Name = "Fly"
-Fly.Parent = FlyFrame
-Fly.BackgroundColor3 = Color3.fromRGB(102, 0, 0)
-Fly.BorderSizePixel = 0
-Fly.Position = UDim2.new(0.0759493634, 0, 0.705797076, 0)
-Fly.Size = UDim2.new(0, 199, 0, 32)
-Fly.Font = Enum.Font.SourceSans
-Fly.Text = "Enable"
-Fly.TextColor3 = Color3.fromRGB(255, 255, 255)
-Fly.TextScaled = true
-Fly.TextSize = 14.000
-Fly.TextWrapped = true
+plus.Name = "plus"
+plus.Parent = Frame
+plus.BackgroundColor3 = Color3.fromRGB(133, 145, 255)
+plus.Position = UDim2.new(0.231578946, 0, 0, 0)
+plus.Size = UDim2.new(0, 45, 0, 28)
+plus.Font = Enum.Font.SourceSans
+plus.Text = "+"
+plus.TextColor3 = Color3.fromRGB(0, 0, 0)
+plus.TextScaled = true
+plus.TextSize = 14.000
+plus.TextWrapped = true
 
-Speeed.Name = "Speeed"
-Speeed.Parent = FlyFrame
-Speeed.BackgroundColor3 = Color3.fromRGB(102, 0, 0)
-Speeed.BorderSizePixel = 0
-Speeed.Position = UDim2.new(0.0759493634, 0, 0.402877688, 0)
-Speeed.Size = UDim2.new(0, 87, 0, 32)
-Speeed.ZIndex = 0
-Speeed.Font = Enum.Font.SourceSans
-Speeed.Text = "Speed:"
-Speeed.TextColor3 = Color3.fromRGB(255, 255, 255)
-Speeed.TextScaled = true
-Speeed.TextSize = 14.000
-Speeed.TextWrapped = true
+speed.Name = "speed"
+speed.Parent = Frame
+speed.BackgroundColor3 = Color3.fromRGB(255, 85, 0)
+speed.Position = UDim2.new(0.468421042, 0, 0.491228074, 0)
+speed.Size = UDim2.new(0, 44, 0, 28)
+speed.Font = Enum.Font.SourceSans
+speed.Text = "50"
+speed.TextColor3 = Color3.fromRGB(0, 0, 0)
+speed.TextScaled = true
+speed.TextSize = 14.000
+speed.TextWrapped = true
 
-Stat.Name = "Stat"
-Stat.Parent = FlyFrame
-Stat.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-Stat.BorderSizePixel = 0
-Stat.Position = UDim2.new(0.299983799, 0, 0.239817441, 0)
-Stat.Size = UDim2.new(0, 85, 0, 15)
-Stat.Font = Enum.Font.SourceSans
-Stat.Text = "Status:"
-Stat.TextColor3 = Color3.fromRGB(255, 255, 255)
-Stat.TextScaled = true
-Stat.TextSize = 14.000
-Stat.TextWrapped = true
+mine.Name = "mine"
+mine.Parent = Frame
+mine.BackgroundColor3 = Color3.fromRGB(123, 255, 247)
+mine.Position = UDim2.new(0.231578946, 0, 0.491228074, 0)
+mine.Size = UDim2.new(0, 45, 0, 29)
+mine.Font = Enum.Font.SourceSans
+mine.Text = "-"
+mine.TextColor3 = Color3.fromRGB(0, 0, 0)
+mine.TextScaled = true
+mine.TextSize = 14.000
+mine.TextWrapped = true
 
-Stat2.Name = "Stat2"
-Stat2.Parent = FlyFrame
-Stat2.BackgroundColor3 = Color3.fromRGB(102, 0, 0)
-Stat2.BorderSizePixel = 0
-Stat2.Position = UDim2.new(0.546535194, 0, 0.239817441, 0)
-Stat2.Size = UDim2.new(0, 27, 0, 15)
-Stat2.Font = Enum.Font.SourceSans
-Stat2.Text = "Off"
-Stat2.TextColor3 = Color3.fromRGB(255, 0, 0)
-Stat2.TextScaled = true
-Stat2.TextSize = 14.000
-Stat2.TextWrapped = true
+closebutton.Name = "Close"
+closebutton.Parent = main.Frame
+closebutton.BackgroundColor3 = Color3.fromRGB(225, 25, 0)
+closebutton.Font = "SourceSans"
+closebutton.Size = UDim2.new(0, 45, 0, 28)
+closebutton.Text = "X"
+closebutton.TextSize = 30
+closebutton.Position =  UDim2.new(0, 0, -1, 27)
 
-Unfly.Name = "Unfly"
-Unfly.Parent = FlyFrame
-Unfly.BackgroundColor3 = Color3.fromRGB(102, 0, 0)
-Unfly.BorderSizePixel = 0
-Unfly.Position = UDim2.new(0.0759493634, 0, 0.705797076, 0)
-Unfly.Size = UDim2.new(0, 199, 0, 32)
-Unfly.Visible = false
-Unfly.Font = Enum.Font.SourceSans
-Unfly.Text = "Disable"
-Unfly.TextColor3 = Color3.fromRGB(255, 255, 255)
-Unfly.TextScaled = true
-Unfly.TextSize = 14.000
-Unfly.TextWrapped = true
+mini.Name = "minimize"
+mini.Parent = main.Frame
+mini.BackgroundColor3 = Color3.fromRGB(192, 150, 230)
+mini.Font = "SourceSans"
+mini.Size = UDim2.new(0, 45, 0, 28)
+mini.Text = "-"
+mini.TextSize = 40
+mini.Position = UDim2.new(0, 44, -1, 27)
 
-Vfly.Name = "Vfly"
-Vfly.Parent = Drag
-Vfly.BackgroundColor3 = Color3.fromRGB(102, 0, 0)
-Vfly.BorderSizePixel = 0
-Vfly.Size = UDim2.new(0, 57, 0, 27)
-Vfly.Font = Enum.Font.SourceSans
-Vfly.Text = "VFly"
-Vfly.TextColor3 = Color3.fromRGB(255, 255, 255)
-Vfly.TextScaled = true
-Vfly.TextSize = 14.000
-Vfly.TextWrapped = true
+mini2.Name = "minimize2"
+mini2.Parent = main.Frame
+mini2.BackgroundColor3 = Color3.fromRGB(192, 150, 230)
+mini2.Font = "SourceSans"
+mini2.Size = UDim2.new(0, 45, 0, 28)
+mini2.Text = "+"
+mini2.TextSize = 40
+mini2.Position = UDim2.new(0, 44, -1, 57)
+mini2.Visible = false
 
-Close.Name = "Close"
-Close.Parent = Drag
-Close.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
-Close.BorderSizePixel = 0
-Close.Position = UDim2.new(0.875, 0, 0, 0)
-Close.Size = UDim2.new(0, 27, 0, 27)
-Close.Font = Enum.Font.SourceSans
-Close.Text = "X"
-Close.TextColor3 = Color3.fromRGB(255, 255, 255)
-Close.TextScaled = true
-Close.TextSize = 14.000
-Close.TextWrapped = true
-
-Minimize.Name = "Minimize"
-Minimize.Parent = Drag
-Minimize.BackgroundColor3 = Color3.fromRGB(0, 150, 191)
-Minimize.BorderSizePixel = 0
-Minimize.Position = UDim2.new(0.75, 0, 0, 0)
-Minimize.Size = UDim2.new(0, 27, 0, 27)
-Minimize.Font = Enum.Font.SourceSans
-Minimize.Text = "-"
-Minimize.TextColor3 = Color3.fromRGB(255, 255, 255)
-Minimize.TextScaled = true
-Minimize.TextSize = 14.000
-Minimize.TextWrapped = true
-
-Flyon.Name = "Fly on"
-Flyon.Parent = Flymguiv2
-Flyon.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Flyon.BorderSizePixel = 0
-Flyon.Position = UDim2.new(0.117647067, 0, 0.550284624, 0)
-Flyon.Size = UDim2.new(0.148000002, 0, 0.314999998, 0)
-Flyon.Visible = false
-Flyon.Active = true
-Flyon.Draggable = true
-
-W.Name = "W"
-W.Parent = Flyon
-W.BackgroundColor3 = Color3.fromRGB(0, 102, 0)
-W.BorderSizePixel = 0
-W.Position = UDim2.new(0.134719521, 0, 0.0152013302, 0)
-W.Size = UDim2.new(0.708999991, 0, 0.499000013, 0)
-W.Font = Enum.Font.SourceSans
-W.Text = "Forward"
-W.TextColor3 = Color3.fromRGB(255, 255, 255)
-W.TextScaled = true
-W.TextSize = 14.000
-W.TextWrapped = true
-
-S.Name = "S"
-S.Parent = Flyon
-S.BackgroundColor3 = Color3.fromRGB(0, 102, 0)
-S.BorderSizePixel = 0
-S.Position = UDim2.new(0.134000003, 0, 0.479999989, 0)
-S.Rotation = 180.000
-S.Size = UDim2.new(0.708999991, 0, 0.499000013, 0)
-S.Font = Enum.Font.SourceSans
-S.Text = "^"
-S.TextColor3 = Color3.fromRGB(255, 255, 255)
-S.TextScaled = true
-S.TextSize = 14.000
-S.TextWrapped = true
-
--- Vflyツールの作成
-local vflyTool = Instance.new("Tool")
-vflyTool.Name = "Vfly"
-vflyTool.RequiresHandle = false
-vflyTool.CanBeDropped = false
-vflyTool.ToolTip = "Vfly GUIを開く"
-
--- ツール装備時にGUIを表示
-vflyTool.Equipped:Connect(function()
-    Flymguiv2.Enabled = true
-end)
-
--- ツール解除時にGUIを非表示
-vflyTool.Unequipped:Connect(function()
-    Flymguiv2.Enabled = false
-end)
-
--- ツールをバックパックに追加
-vflyTool.Parent = LocalPlayer:WaitForChild("Backpack")
-
--- Vfly機能の変数
-local isVflying = false
+-- Fly機能の変数
+local flySpeed = 50
+local isFlying = false
 local bodyVelocity, bodyGyro
-local currentSpeed = 20
+local flyConnection
 
--- Flyボタンクリック
-Fly.MouseButton1Click:Connect(function()
-    if not LocalPlayer.Character then return end
+-- 速度更新
+local function updateSpeed()
+    flySpeed = tonumber(speed.Text) or 50
+    if flySpeed < 1 then flySpeed = 1 end
+    if flySpeed > 200 then flySpeed = 200 end
+    speed.Text = tostring(flySpeed)
+end
+
+-- Fly開始関数（修正版）
+local function startFly()
+    if isFlying then return end
     
-    local HumanoidRP = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-    if not HumanoidRP then return end
+    local character = LocalPlayer.Character
+    if not character then return end
     
-    Fly.Visible = false
-    Stat2.Text = "On"
-    Stat2.TextColor3 = Color3.fromRGB(0, 255, 0)
-    Unfly.Visible = true
-    Flyon.Visible = true
-    isVflying = true
+    local humanoid = character:FindFirstChild("Humanoid")
+    local rootPart = character:FindFirstChild("HumanoidRootPart") or 
+                     character:FindFirstChild("Torso") or 
+                     character:FindFirstChild("UpperTorso")
     
-    -- 速度を取得
-    currentSpeed = tonumber(Speed.Text) or 20
+    if not humanoid or not rootPart then return end
+    
+    isFlying = true
+    onof.Text = "STOP"
+    humanoid.PlatformStand = true
     
     -- BodyVelocityとBodyGyroを作成
     bodyVelocity = Instance.new("BodyVelocity")
     bodyVelocity.Velocity = Vector3.zero
-    bodyVelocity.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
-    bodyVelocity.Parent = HumanoidRP
+    bodyVelocity.MaxForce = Vector3.new(10000, 10000, 10000)
+    bodyVelocity.P = 1000
+    bodyVelocity.Parent = rootPart
     
     bodyGyro = Instance.new("BodyGyro")
-    bodyGyro.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
-    bodyGyro.D = 5000
-    bodyGyro.P = 100000
-    bodyGyro.CFrame = workspace.CurrentCamera.CFrame
-    bodyGyro.Parent = HumanoidRP
+    bodyGyro.MaxTorque = Vector3.new(10000, 10000, 10000)
+    bodyGyro.P = 1000
+    bodyGyro.CFrame = rootPart.CFrame
+    bodyGyro.Parent = rootPart
     
-    -- カメラ追従
-    RunService.RenderStepped:Connect(function()
-        if not isVflying or not bodyGyro or not bodyGyro.Parent then return end
+    -- キーボード入力による移動
+    local moveDirection = Vector3.zero
+    local lastUpdate = tick()
+    
+    flyConnection = RunService.Heartbeat:Connect(function(delta)
+        if not isFlying or not rootPart or not bodyVelocity or not bodyGyro then
+            return
+        end
+        
+        -- カメラ方向の追従
         bodyGyro.CFrame = workspace.CurrentCamera.CFrame
+        
+        -- 移動方向の計算
+        local newDirection = Vector3.zero
+        
+        if UserInputService:IsKeyDown(Enum.KeyCode.W) then
+            newDirection = newDirection + workspace.CurrentCamera.CFrame.LookVector
+        end
+        if UserInputService:IsKeyDown(Enum.KeyCode.S) then
+            newDirection = newDirection - workspace.CurrentCamera.CFrame.LookVector
+        end
+        if UserInputService:IsKeyDown(Enum.KeyCode.A) then
+            newDirection = newDirection - workspace.CurrentCamera.CFrame.RightVector
+        end
+        if UserInputService:IsKeyDown(Enum.KeyCode.D) then
+            newDirection = newDirection + workspace.CurrentCamera.CFrame.RightVector
+        end
+        
+        -- 速度適用
+        if newDirection.Magnitude > 0 then
+            newDirection = newDirection.Unit * flySpeed
+        end
+        
+        -- 上昇/下降
+        if up.MouseEnter.Connected or UserInputService:IsKeyDown(Enum.KeyCode.Space) then
+            newDirection = newDirection + Vector3.new(0, flySpeed, 0)
+        end
+        if down.MouseEnter.Connected or UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) then
+            newDirection = newDirection - Vector3.new(0, flySpeed, 0)
+        end
+        
+        bodyVelocity.Velocity = newDirection
     end)
-end)
+    
+    print("Fly mode: ON")
+end
 
--- Unflyボタンクリック
-Unfly.MouseButton1Click:Connect(function()
-    if not LocalPlayer.Character then return end
+-- Fly停止関数
+local function stopFly()
+    if not isFlying then return end
     
-    local HumanoidRP = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-    if not HumanoidRP then return end
+    isFlying = false
+    onof.Text = "fly"
     
-    Fly.Visible = true
-    Stat2.Text = "Off"
-    Stat2.TextColor3 = Color3.fromRGB(255, 0, 0)
-    Unfly.Visible = false
-    Flyon.Visible = false
-    isVflying = false
+    local character = LocalPlayer.Character
+    if character then
+        local humanoid = character:FindFirstChild("Humanoid")
+        if humanoid then
+            humanoid.PlatformStand = false
+        end
+    end
+    
+    -- 接続を切断
+    if flyConnection then
+        flyConnection:Disconnect()
+        flyConnection = nil
+    end
     
     -- BodyVelocityとBodyGyroを削除
     if bodyVelocity and bodyVelocity.Parent then
         bodyVelocity:Destroy()
+        bodyVelocity = nil
     end
     
     if bodyGyro and bodyGyro.Parent then
         bodyGyro:Destroy()
+        bodyGyro = nil
     end
     
-    bodyVelocity = nil
-    bodyGyro = nil
-end)
-
--- Wボタン（前進）機能
-local function moveForward()
-    if not isVflying or not LocalPlayer.Character then return end
-    
-    local HumanoidRP = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-    if not HumanoidRP or not bodyVelocity then return end
-    
-    -- 速度を更新
-    currentSpeed = tonumber(Speed.Text) or 20
-    
-    bodyVelocity.Velocity = workspace.CurrentCamera.CFrame.LookVector * currentSpeed
+    print("Fly mode: OFF")
 end
 
-local function stopMoving()
-    if not isVflying or not bodyVelocity then return end
-    bodyVelocity.Velocity = Vector3.zero
-end
-
-W.MouseButton1Down:Connect(function()
-    moveForward()
-end)
-
-W.MouseButton1Up:Connect(function()
-    stopMoving()
-end)
-
-W.TouchLongPress:Connect(function()
-    moveForward()
-end)
-
--- Sボタン（後退）機能
-local function moveBackward()
-    if not isVflying or not LocalPlayer.Character then return end
-    
-    local HumanoidRP = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-    if not HumanoidRP or not bodyVelocity then return end
-    
-    -- 速度を更新
-    currentSpeed = tonumber(Speed.Text) or 20
-    
-    bodyVelocity.Velocity = workspace.CurrentCamera.CFrame.LookVector * -currentSpeed
-end
-
-S.MouseButton1Down:Connect(function()
-    moveBackward()
-end)
-
-S.MouseButton1Up:Connect(function()
-    stopMoving()
-end)
-
-S.TouchLongPress:Connect(function()
-    moveBackward()
-end)
-
--- Closeボタン
-Close.MouseButton1Click:Connect(function()
-    Flymguiv2:Destroy()
-end)
-
--- Minimizeボタン機能
-local function toggleMinimize()
-    if Minimize.Text == "-" then
-        Minimize.Text = "+"
-        FlyFrame.Visible = false
-    elseif Minimize.Text == "+" then
-        Minimize.Text = "-"
-        FlyFrame.Visible = true
-    end
-end
-
-Minimize.MouseButton1Click:Connect(toggleMinimize)
-
--- キーボード入力による移動（オプション）
-UserInputService.InputBegan:Connect(function(input, gameProcessed)
-    if gameProcessed or not isVflying then return end
-    
-    if input.KeyCode == Enum.KeyCode.W then
-        moveForward()
-    elseif input.KeyCode == Enum.KeyCode.S then
-        moveBackward()
+-- Flyトグル
+onof.MouseButton1Down:connect(function()
+    if isFlying then
+        stopFly()
+    else
+        updateSpeed()
+        startFly()
     end
 end)
 
-UserInputService.InputEnded:Connect(function(input, gameProcessed)
-    if gameProcessed or not isVflying then return end
-    
-    if input.KeyCode == Enum.KeyCode.W or input.KeyCode == Enum.KeyCode.S then
-        stopMoving()
+-- UPボタン（上昇）
+local upHovering = false
+up.MouseEnter:Connect(function()
+    upHovering = true
+    while upHovering and isFlying and bodyVelocity do
+        local currentVel = bodyVelocity.Velocity
+        bodyVelocity.Velocity = Vector3.new(currentVel.X, flySpeed, currentVel.Z)
+        RunService.Heartbeat:Wait()
     end
 end)
+
+up.MouseLeave:Connect(function()
+    upHovering = false
+    if isFlying and bodyVelocity then
+        local currentVel = bodyVelocity.Velocity
+        bodyVelocity.Velocity = Vector3.new(currentVel.X, 0, currentVel.Z)
+    end
+end)
+
+-- DOWNボタン（下降）
+local downHovering = false
+down.MouseEnter:Connect(function()
+    downHovering = true
+    while downHovering and isFlying and bodyVelocity do
+        local currentVel = bodyVelocity.Velocity
+        bodyVelocity.Velocity = Vector3.new(currentVel.X, -flySpeed, currentVel.Z)
+        RunService.Heartbeat:Wait()
+    end
+end)
+
+down.MouseLeave:Connect(function()
+    downHovering = false
+    if isFlying and bodyVelocity then
+        local currentVel = bodyVelocity.Velocity
+        bodyVelocity.Velocity = Vector3.new(currentVel.X, 0, currentVel.Z)
+    end
+end)
+
+-- 速度調整ボタン
+plus.MouseButton1Down:connect(function()
+    local current = tonumber(speed.Text) or 50
+    if current < 200 then
+        speed.Text = tostring(current + 5)
+        updateSpeed()
+    end
+end)
+
+mine.MouseButton1Down:connect(function()
+    local current = tonumber(speed.Text) or 50
+    if current > 5 then
+        speed.Text = tostring(current - 5)
+        updateSpeed()
+    end
+end)
+
+-- 閉じるボタン
+closebutton.MouseButton1Click:Connect(function()
+    stopFly()
+    main:Destroy()
+end)
+
+-- 最小化ボタン
+mini.MouseButton1Click:Connect(function()
+    up.Visible = false
+    down.Visible = false
+    onof.Visible = false
+    plus.Visible = false
+    speed.Visible = false
+    mine.Visible = false
+    mini.Visible = false
+    mini2.Visible = true
+    main.Frame.BackgroundTransparency = 1
+    closebutton.Position = UDim2.new(0, 0, -1, 57)
+end)
+
+mini2.MouseButton1Click:Connect(function()
+    up.Visible = true
+    down.Visible = true
+    onof.Visible = true
+    plus.Visible = true
+    speed.Visible = true
+    mine.Visible = true
+    mini.Visible = true
+    mini2.Visible = false
+    main.Frame.BackgroundTransparency = 0 
+    closebutton.Position = UDim2.new(0, 0, -1, 27)
+end)
+
+-- ドラッグ可能にする
+Frame.Active = true
+Frame.Draggable = true
 
 -- キャラクター変更時の処理
 LocalPlayer.CharacterAdded:Connect(function(character)
-    task.wait(1) -- キャラクターのロードを待つ
-    
-    -- 飛行中なら再設定
-    if isVflying then
-        Fly.Visible = false
-        Stat2.Text = "On"
-        Stat2.TextColor3 = Color3.fromRGB(0, 255, 0)
-        Unfly.Visible = true
-        Flyon.Visible = true
-    end
+    task.wait(0.5) -- キャラクターのロードを待つ
+    stopFly()
 end)
 
-print("Vfly tool loaded successfully!")
-print("Use Vfly tool in your backpack to open the GUI")
+-- 起動通知
+game:GetService("StarterGui"):SetCore("SendNotification", { 
+    Title = "FLY GUI V3",
+    Text = "BY XNEO - Fixed Version",
+    Icon = "rbxthumb://type=Asset&id=5107182114&w=150&h=150",
+    Duration = 5
+})
+
+print("Fly GUI V3 loaded successfully!")
+print("Controls: W/A/S/D to move, SPACE/UP to ascend, SHIFT/DOWN to descend")
+print("Speed: " .. tostring(flySpeed))
